@@ -1,0 +1,150 @@
+<br/>
+<div class="container">
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+      <form>
+        <div class="form-row">
+          <div class="col-md-4">
+            <input type="text" name="name" id="name" [(ngModel)]="newBook.name" placeholder="Name" class="form-control">
+          </div>
+          <div class="col-md-7">
+            <input name="author" id="author" [(ngModel)]="newBook.author" placeholder="Author"
+              class="form-control" >
+          </div>
+          <div class="col-md-7">
+            <input name="publisher" id="publisher" [(ngModel)]="newBook.publisher" placeholder="Publisher"
+              class="form-control" >
+          </div>
+          <div class="col-md-4">
+            <input name="cost" id="cost" [(ngModel)]="newBook.cost" placeholder="Cost"
+              class="form-control" >
+          </div>
+          <div class="col-md-4">
+            <input name="pages" id="pages" [(ngModel)]="newBook.pages" placeholder="Pages"
+              class="form-control" >
+          </div>
+          <div class="col-md-4">
+            <input name="booktype" id="booktype" [(ngModel)]="newBook.booktype" placeholder="BookType"
+              class="form-control" >
+          </div>
+
+          <div class="col-md-1">
+            <button type="submit" class="btn btn-primary" (click)="create()">Add</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-1"></div>
+  </div>
+  <br />
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+      <div class="books" *ngIf="booksList">
+        <table class="table table-striped table-dark">
+          <thead class="h">
+            <tr class="h">
+              <th class="h">Name</th>
+              <th class="h">Author</th>
+              <th class="h">Publisher</th>
+              <th class="h">Cost</th>
+              <th class="h">Pages</th>
+              <th class="h">BookType</th>
+              <th class="h">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="book" (dblclick)="editBook(book)" *ngFor="let book of booksList">
+             <ng-container *ngIf="!editBooks.includes(book); else editTD">
+                <td>{{book.name}}</td>
+                <td>{{book.author}}</td>
+                <td>{{book.publisher}}</td>
+                <td>{{book.cost}}</td>
+                <td>{{book.pages}}</td>
+                <td>{{book.booktype}}</td>
+                <td>{{book.status}}</td>
+
+              </ng-container>
+
+
+
+              <ng-template #editTD>
+
+                <td><input type="text" name="name" id="name" (keypress)="submitBook($event, book)" [(ngModel)]="book.name"
+
+                    placeholder="Name" class="form-control"></td>
+
+                <td><input type="text" name="author" id="author" (keypress)="submitBook($event, book)"
+
+                    [(ngModel)]="book.author" placeholder="Author" class="form-control"></td>
+
+                    <td><input type="text" name="publisher" id="publisher" (keypress)="submitBook($event, book)"
+
+                      [(ngModel)]="book.publisher" placeholder="Publisher" class="form-control"></td>
+                
+                    <td><input type="text" name="cost" id="cost" (keypress)="submitBook($event, book)"
+
+                      [(ngModel)]="book.cost" placeholder="Cost" class="form-control"></td>
+
+                      <td><input type="text" name="pages" id="pages" (keypress)="submitBook($event, book)"
+
+                        [(ngModel)]="book.pages" placeholder="Pages" class="form-control"></td>
+
+                        <td><input type="text" name="booktype" id="booktype" (keypress)="submitBook($event, book)"
+
+                          [(ngModel)]="book.booktype" placeholder="BookType" class="form-control"></td>
+                  <td>        
+
+                  <input type="text" name="status" id="status" (keypress)="submitBook($event, book)" [(ngModel)]="book.status"
+
+                    placeholder="Status" class="form-control">
+
+                </td>
+
+              </ng-template>
+
+
+
+              <td class="o">
+
+                <button class="btn btn-success" (click)="doneBook(book)">
+
+                  <i class="fa fa-check"></i>
+
+                </button>
+
+                <button class="btn btn-primary" (click)="editBook(book)">
+
+                  <i class="fa fa-pencil"></i>
+
+                </button>
+
+                <button class="btn btn-danger" (click)="deleteBook(book)">
+
+                  <i class="fa fa-trash"></i>
+
+                </button>
+
+              </td>
+
+
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+    <div class="col-md-1"></div>
+
+
+
+  </div>
+
+</div>
+
